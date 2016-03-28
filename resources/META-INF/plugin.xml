@@ -1,0 +1,34 @@
+<idea-plugin version="2">
+  <id>RunTaskAction</id>
+  <name>ApkPackerPlugin</name>
+  <version>1.0</version>
+  <vendor email="nihao-zsj@163.com" url="https://github.com/zhouaijia/packer-plugin">Aijia</vendor>
+
+  <description><![CDATA[
+      A packer plugin for android.
+    ]]></description>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="141.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <depends>org.jetbrains.plugins.gradle</depends>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="RunTaskAction" class="com.aijia.plugin.RunTaskAction" text="BuildApks" description="run the specified task">
+      <add-to-group group-id="BuildMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl Z" second-keystroke="X"/>
+    </action>
+  </actions>
+
+</idea-plugin>
