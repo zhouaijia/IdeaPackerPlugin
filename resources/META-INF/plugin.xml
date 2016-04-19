@@ -1,8 +1,8 @@
 <idea-plugin version="2">
   <id>RunTaskAction</id>
   <name>ApkPackerPlugin</name>
-  <version>1.0</version>
-  <vendor email="nihao-zsj@163.com" url="https://github.com/zhouaijia/packer-plugin">Aijia</vendor>
+  <version>1.3</version>
+  <vendor email="nihao-zsj@163.com" url="https://github.com/zhouaijia/IdeaPackerPlugin">Aijia</vendor>
 
   <description><![CDATA[
       A packer plugin for android.
@@ -17,17 +17,27 @@
   <depends>com.intellij.modules.lang</depends>
   -->
 
+  <!--IntelliJ IDEA提供服务的概念。一个服务是一个在你的插件调用ServiceManager类的getService方法时按需加载的插件组件。
+  即使一个服务被请求多次，IntelliJ IDEA也保证每个服务只有一个实例被加载。
+  一个服务必须在plugin.xml文件中指明接口和实现类。
+  服务的实现类用于服务的实例化。
+  IntelliJ IDEA提供3类服务：application服务、project服务和module服务。-->
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <projectService serviceInterface="com.aijia.plugin.signedPackage.SignedApkSettings"
+                    serviceImplementation="com.aijia.plugin.signedPackage.SignedApkSettings"/>
   </extensions>
 
+  <!--这个很重要，去掉后插件运行会报错——找不到相关类-->
   <depends>org.jetbrains.plugins.gradle</depends>
 
   <actions>
     <!-- Add your actions here -->
-    <action id="RunTaskAction" class="com.aijia.plugin.RunTaskAction" text="BuildApks" description="run the specified task">
-      <add-to-group group-id="BuildMenu" anchor="last"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl Z" second-keystroke="X"/>
+    <action id="SignApkAction"
+            class="com.aijia.plugin.SignApkAction"
+            text="SignApkAction"
+            description="sign apk"
+            icon="PluginIcons.PackerIcon">
+      <add-to-group group-id="MainToolBar" anchor="before" relative-to-action="HelpTopics" />
     </action>
   </actions>
 
